@@ -123,7 +123,7 @@ class TennisklubbenSmash {
                 } else if (c.equals("2")){
                     System.out.print("Hvilken spiller (navn): "); String navn = scanner.nextLine();
                     Optional<Medlem> om = klub.findMedlemVedNavn(navn);
-                    if (!om.isPresent() || !(om.get() instanceof KonkurrenceSpiller)){ System.out.println("Konkurrencespiller ikke fundet"); continue; }
+                    if (om.isEmpty() || !(om.get() instanceof KonkurrenceSpiller)){ System.out.println("Konkurrencespiller ikke fundet"); continue; }
                     KonkurrenceSpiller ks = (KonkurrenceSpiller)om.get();
                     System.out.print("Disciplin (SINGLE/DOUBLE/MIXED_DOUBLE): "); Enums d = Enums.valueOf(scanner.nextLine().trim().toUpperCase());
                     System.out.print("Score (tal, højere er bedre): "); double score = Double.parseDouble(scanner.nextLine());
@@ -132,12 +132,12 @@ class TennisklubbenSmash {
                 } else if (c.equals("3")){
                     System.out.print("Hvilken spiller (navn): "); String navn = scanner.nextLine();
                     Optional<Medlem> om = klub.findMedlemVedNavn(navn);
-                    if (!om.isPresent() || !(om.get() instanceof KonkurrenceSpiller)){ System.out.println("Konkurrencespiller ikke fundet"); continue; }
+                    if (om.isEmpty() || !(om.get() instanceof KonkurrenceSpiller)){ System.out.println("Konkurrencespiller ikke fundet"); continue; }
                     KonkurrenceSpiller ks = (KonkurrenceSpiller)om.get();
                     System.out.print("Turneringens navn: "); String tnavn = scanner.nextLine();
                     System.out.print("Rangering (1=bedst): "); int rang = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Kampresultat (fx 6-3 6-4): "); String kres = scanner.nextLine();
-                    ks.addTurneringsResultat(new TurneringsResultat(tnavn, rang, kres, LocalDate.now()));
+                    System.out.print("Kampresultat (fx 6-3 6-4): "); String kRes = scanner.nextLine();
+                    ks.addTurneringsResultat(new TurneringsResultat(tnavn, rang, kRes, LocalDate.now()));
                     System.out.println("Turneringsresultat registreret");
                 } else if (c.equals("4")){
                     for (boolean junior : new boolean[]{true,false}){
@@ -160,6 +160,6 @@ class TennisklubbenSmash {
 
     private static void afslutOgGem(){
         try { klub.gem(DATA_MAPPE); System.out.println("Data gemt i ./" + DATA_MAPPE); } catch (IOException e){ System.out.println("Kunne ikke gemme: " + e.getMessage()); }
-        System.out.println("Farvel!");
+        System.out.println("Lukker ned");
     }
 }

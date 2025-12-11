@@ -1,8 +1,8 @@
 import java.util.UUID;
 
-// ---------------------------
+
 // Person / Medlem klasser
-// ---------------------------
+
 abstract class Person {
     protected UUID id;
     protected String navn;

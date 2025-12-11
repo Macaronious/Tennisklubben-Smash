@@ -2,9 +2,8 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-// ---------------------------
 // Klub manager med CSV-persistens
-// ---------------------------
+
 class Klub implements MedlemsOperationer, Persistens {
     private Map<UUID, Medlem> medlemmer = new HashMap<>();
 
